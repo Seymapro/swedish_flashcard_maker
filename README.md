@@ -26,11 +26,15 @@ The process involves several steps, executed by distinct Python scripts, to prep
 
 4.  **AI Word Type Classification:** Another script iterates through each chunk file. It sends the content of the chunk to the Google Gemini API with instructions to identify whether each line contains a noun, verb, or phrase. The script then saves the AI's response, which should include the original data plus a new 'Type' column, into a corresponding file in a `classified_chunks` directory. This script requires a configured Google AI API key.
 
-5.  **Merging Classified Chunks:** A script reads all the individual classified chunk files from the `classified_chunks` directory, concatenates them using `pandas`, removes potential duplicates, and saves the result as a single, comprehensive CSV file (e.g., `classified_wordlist_all.csv`).
+5.  **Merging Classified Chunks:** A script reads all the individual classified chunk files from the `classified_chunks` directory, concatenates them using `pandas`, removes potential duplicates, and saves the result as a single, comprehensive CSV file (e.g., `classified_wordlist_all.csv`). The script then turns the CSV file into JSON since it's more convenient to name the variables in that way.
 
 6.  **Generating Prompts:** A script to generate prompt using Gemini.
 
-7. **Generating Images From the Wordlist CSV File**: This Python script uses Imagen3 the prompts that Gemini created.  
+7. **Generating Images From the Wordlist CSV File**: This Python script uses Imagen3 the prompts that Gemini created. The 'Type' column is also important here since some words are heteronym.
+
+8. **Generating Sounds From the Wordlist CSV File:**  This Python script uses Elevenlabs API to pronounce Swedish words.
+
+9. **Creating and Importing .apgk File to Anki:** The script takes Swedish and English words from the JSON file and images and sounds from the files i previously generated. I used genanki repository to do so.
 
 ## Prerequisites
 
@@ -41,38 +45,12 @@ The process involves several steps, executed by distinct Python scripts, to prep
 * Your initial Swedish-English vocabulary list (must be converted to CSV format).
 * The Python scripts associated with this project (for cleaning, chunking, classifying, merging).
 * Anki (to use the final generated deck).
+* [Genanki repository](https://github.com/kerrickstaley/genanki)
 
 ## Installation
 
-1.  **Clone the repository (if applicable):**
-    ```bash
-    git clone <your-repository-url>
-    cd <your-repository-directory>
-    ```
-    (Ensure the Python scripts are present in the directory).
-2.  **Install dependencies:**
-    ```bash
-    pip install pandas google-generativeai
-    ```
-3.  **Set up your API Key:**
-    * **Recommended:** Set an environment variable named `GEMINI_API_KEY`.
-        * Linux/macOS: `export GEMINI_API_KEY='your_api_key_here'`
-        * Windows (cmd): `set GEMINI_API_KEY=your_api_key_here`
-        * Windows (PowerShell): `$env:GEMINI_API_KEY='your_api_key_here'`
-    * *Alternatively:* Configure the API key directly within the classification script (ensure not to commit sensitive keys to version control).
+The reop is not ready for installation yet.
 
-## Usage
-
-1.  Place your initial Swedish-English wordlist file (converted to CSV format) in the project directory.
-2.  Run the **Data Cleaning** script, ensuring input/output filenames match your needs.
-3.  Run the **Chunking** script, using the cleaned CSV as input.
-4.  Ensure your `GEMINI_API_KEY` is accessible (e.g., via environment variable).
-5.  Run the **AI Word Type Classification** script. It will process files from the `chunks` directory (or as configured) and save results.
-6.  Run the **Merging Classified Chunks** script to combine the classified files into the final CSV output.
-7.  **(Next Steps - Manual/External)** Use the final generated CSV file as input for further processing:
-    * Generate audio files (e.g., using Text-to-Speech services).
-    * Generate images (e.g., using image generation APIs).
-    * Format the data and import it into Anki using its import functionality.
 
 ## Contributing
 
@@ -80,11 +58,15 @@ Contributions, issues, and feature requests are welcome! Please feel free to ope
 
 ## License
 
-[Specify Your License Here - e.g., MIT, GPL, Apache 2.0]
+MIT license
 
 ## Acknowledgements
 
+The initial wordlist was sourced from studium.uu.se.
+This project utilizes the Google Gemini API.
+
 * The initial wordlist was sourced from [studium.uu.se](https://studium.uu.se).
 * This project utilizes the [Google Gemini API](https://ai.google.dev/).
+* This project utilizes [genanki](https://github.com/kerrickstaley/genanki)
 
 
