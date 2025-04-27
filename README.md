@@ -1,3 +1,6 @@
+![anan](https://img.shields.io/badge/gay-sex-blue?link=-)
+![anan](https://img.shields.io/badge/ku%C5%9Fsiken-31-yellow?link=-)
+
 # Swedish Anki Flashcard Generator 
 
 This project provides a workflow and scripts to transform a Swedish-English vocabulary list into a structured CSV file suitable for creating enhanced Anki flashcards. The process leverages AI (Google Gemini) to automatically classify word types (noun, verb, phrase), laying the groundwork for generating Anki decks potentially enriched with AI-generated audio pronunciations and illustrative images (Note: image/audio generation steps are not included in these specific scripts but are the intended final goal).
@@ -83,3 +86,5 @@ Contributions, issues, and feature requests are welcome! Please feel free to ope
 
 * The initial wordlist was sourced from [studium.uu.se](https://studium.uu.se).
 * This project utilizes the [Google Gemini API](https://ai.google.dev/).
+
+
